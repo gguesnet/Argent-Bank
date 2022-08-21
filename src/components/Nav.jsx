@@ -12,7 +12,7 @@ function Nav() {
       <div>
         <a className="main-nav-item" href="./sign-in.html">
           <i className="fa fa-user-circle" />
-          Sign In
+          &nbsp;Sign In
         </a>
       </div>
     </nav>
