@@ -1,29 +1,44 @@
+import ApiService from "../API";
+
 function Form() {
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const data = {
+      email: form.get("email"),
+      password: form.get("password"),
+    };
+
+    try {
+      const response = new ApiService(data);
+      const result = await response.postUserLogin(data);
+      window.localStorage.setItem("token", result.body.token);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon" />
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleOnSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input type="text" name="email" id="username" />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input type="password" name="password" id="password" />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input type="checkbox" name="" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          {/* PLACEHOLDER DUE TO STATIC SITE */}
-          <a href="./user.html" className="sign-in-button">
+          <button className="sign-in-button" type="submit">
             Sign In
-          </a>
-          {/* SHOULD BE THE BUTTON BELOW */}
-          {/* <button class="sign-in-button">Sign In</button> */}
-          {/*  */}
+          </button>
         </form>
       </section>
     </main>
