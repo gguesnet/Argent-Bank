@@ -1,16 +1,24 @@
+import PropTypes from "prop-types";
+
 function Transaction({ title, amount, description }) {
   return (
-    <section class="account">
-      <div class="account-content-wrapper">
-        <h3 class="account-title">{title}</h3>
-        <p class="account-amount">{amount}</p>
-        <p class="account-amount-description">{description}</p>
+    <section className="account">
+      <div className="account-content-wrapper">
+        <h3 className="account-title">{title}</h3>
+        <p className="account-amount">{amount}</p>
+        <p className="account-amount-description">{description}</p>
       </div>
-      <div class="account-content-wrapper cta">
-        <button class="transaction-button">View transactions</button>
+      <div className="account-content-wrapper cta">
+        <button className="transaction-button">View transactions</button>
       </div>
     </section>
   );
 }
+
+Transaction.prototype = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
 
 export default Transaction;
