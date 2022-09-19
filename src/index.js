@@ -13,8 +13,8 @@ root.render(
     <Router>
       <Routes>
         <Route index path="/" element={<Home />}></Route>
-        <Route index path="/signin" element={<Signin />}></Route>
-        <Route index path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/signin" element={<Signin />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>
