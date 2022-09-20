@@ -19,4 +19,21 @@ export default class ApiService {
     });
     return response.json();
   }
+
+  async postUserProfile(token) {
+    const response = await fetch(`${this.baseURL}user/profile`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(this.data),
+    });
+    return response.json();
+  }
 }
