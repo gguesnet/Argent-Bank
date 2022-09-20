@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../redux";
 
 function Nav() {
   const isLoggedIn = useSelector((state) => state.authentification);
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(signOut());
+  };
 
   console.log(isLoggedIn);
   return (
@@ -25,6 +32,14 @@ function Nav() {
             ? ` ${isLoggedIn.username}`
             : " Sign In"}
         </Link>
+        {isLoggedIn.isAuthentificated ? (
+          <Link className="main-nav-item" to="/" onClick={handleClick}>
+            <i className="fa fa-arrow-right-from-bracket" />
+            Sign Out
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
     </nav>
   );

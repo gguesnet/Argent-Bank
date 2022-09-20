@@ -9,10 +9,15 @@ const authSlice = createSlice({
       state.username = action.payload.username;
       state.token = action.payload.token;
     },
+    signOut: (state, action) => {
+      state.isAuthentificated = false;
+      state.username = null;
+      state.token = null;
+    },
   },
 });
 
-export const { isLoggedIn } = authSlice.actions;
+export const { isLoggedIn, signOut } = authSlice.actions;
 
 export const store = configureStore({
   reducer: {
