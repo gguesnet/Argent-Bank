@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Nav() {
+  const isLoggedIn = useSelector((state) => state.authentification);
+
+  console.log(isLoggedIn);
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -14,7 +18,9 @@ function Nav() {
       <div>
         <Link className="main-nav-item" to="/signin">
           <i className="fa fa-user-circle" />
-          &nbsp;Sign In
+          {isLoggedIn.isAuthentificated
+            ? ` ${isLoggedIn.username}`
+            : " Sign In"}
         </Link>
       </div>
     </nav>

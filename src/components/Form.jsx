@@ -1,6 +1,10 @@
 import ApiService from "../API";
+import { useDispatch } from "react-redux";
+import { isLoggedIn } from "../redux";
 
 function Form() {
+  const dispatch = useDispatch();
+
   async function handleOnSubmit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -12,7 +16,21 @@ function Form() {
     try {
       const response = new ApiService(data);
       const result = await response.postUserLogin(data);
-      window.localStorage.setItem("token", result.body.token);
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: data.email,
+          token: result.body.token,
+          isAuthentificated: true,
+        })
+      );
+      dispatch(
+        isLoggedIn({
+          isAuthentificated: true,
+          username: data.email,
+          token: result.body.token,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
