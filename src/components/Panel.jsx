@@ -1,15 +1,46 @@
 import Transaction from "./Transaction";
+import { useSelector } from "react-redux";
 
 function Panel() {
+  const isLoggedIn = useSelector((state) => state.authentification);
+
+  function handleClick(e) {
+    const form = document.getElementById("form-info");
+    const firstname = document.getElementById("firstname");
+    const lastname = document.getElementById("lastname");
+
+    form.classList.toggle("disabled");
+
+    firstname.toggleAttribute("disabled");
+    lastname.toggleAttribute("disabled");
+
+    if (form.classList.contains("disabled")) {
+      e.target.textContent = "Edit Name";
+    } else {
+      e.target.textContent = "Cancel";
+    }
+  }
+
+  function handleSubmit() {}
+
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {isLoggedIn.username}
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <form id="form-info" className="disabled" onSubmit={handleSubmit}>
+          <input id="firstname" name="firstname" type="text" disabled={true} />
+          <input id="lastname" name="lastname" type="text" disabled={true} />
+          <button className="edit-button" type="submit">
+            Save
+          </button>
+        </form>
+        <button className="edit-button" onClick={handleClick}>
+          Edit Name
+        </button>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Transaction

@@ -1,9 +1,11 @@
 import ApiService from "../API";
 import { useDispatch } from "react-redux";
 import { isLoggedIn } from "../redux";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -31,6 +33,7 @@ function Form() {
           token: result.body.token,
         })
       );
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

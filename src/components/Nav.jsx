@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../redux";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
   const isLoggedIn = useSelector((state) => state.authentification);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(signOut());
+    navigate("/");
   };
 
-  console.log(isLoggedIn);
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
