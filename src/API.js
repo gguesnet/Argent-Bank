@@ -36,4 +36,21 @@ export default class ApiService {
     });
     return response.json();
   }
+
+  async putUserProfile(token) {
+    const response = await fetch(`${this.baseURL}user/profile`, {
+      method: "PUT",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(this.data),
+    });
+    return response.json();
+  }
 }

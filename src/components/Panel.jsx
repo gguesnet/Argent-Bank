@@ -1,3 +1,4 @@
+import ApiService from "../API";
 import Transaction from "./Transaction";
 import { useSelector } from "react-redux";
 
@@ -21,7 +22,23 @@ function Panel() {
     }
   }
 
-  function handleSubmit() {}
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const data = {
+      firstName: form.get("firstname"),
+      lastName: form.get("lastname"),
+    };
+
+    try {
+      const token = JSON.parse(window.localStorage.getItem("user"));
+      const response = new ApiService(data);
+      const result = await response.putUserProfile(token.token);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <main className="main bg-dark">
