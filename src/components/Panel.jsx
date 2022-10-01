@@ -46,7 +46,7 @@ function Panel() {
         <h1>
           Welcome back
           <br />
-          {isLoggedIn.username}
+          {`${isLoggedIn.firstname} ${isLoggedIn.lastname}`}
         </h1>
         <form id="form-info" className="disabled" onSubmit={handleSubmit}>
           <input id="firstname" name="firstname" type="text" disabled={true} />

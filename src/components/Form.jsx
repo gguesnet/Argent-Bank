@@ -18,6 +18,7 @@ function Form() {
     try {
       const response = new ApiService(data);
       const result = await response.postUserLogin(data);
+      const getUserProfile = await response.postUserProfile(result.body.token);
       window.localStorage.setItem(
         "user",
         JSON.stringify({
@@ -29,7 +30,9 @@ function Form() {
       dispatch(
         isLoggedIn({
           isAuthentificated: true,
-          username: data.email,
+          email: data.email,
+          firstname: getUserProfile.body.firstName,
+          lastname: getUserProfile.body.lastName,
           token: result.body.token,
         })
       );

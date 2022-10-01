@@ -31,7 +31,7 @@ function Nav() {
         >
           <i className="fa fa-user-circle" />
           {isLoggedIn.isAuthentificated
-            ? ` ${isLoggedIn.username}`
+            ? ` ${isLoggedIn.firstname}`
             : " Sign In"}
         </Link>
         {isLoggedIn.isAuthentificated ? (
