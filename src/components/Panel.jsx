@@ -1,9 +1,11 @@
 import ApiService from "../API";
 import Transaction from "./Transaction";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isLoggedIn } from "../redux";
 
 function Panel() {
-  const isLoggedIn = useSelector((state) => state.authentification);
+  const dispatch = useDispatch();
+  const isConnected = useSelector((state) => state.authentification);
 
   function handleClick(e) {
     const form = document.getElementById("form-info");
@@ -34,7 +36,15 @@ function Panel() {
       const token = JSON.parse(window.localStorage.getItem("user"));
       const response = new ApiService(data);
       const result = await response.putUserProfile(token.token);
-      console.log(result);
+      dispatch(
+        isLoggedIn({
+          isAuthentificated: isConnected.isAuthentificated,
+          email: isConnected.emal,
+          firstname: result.body.firstName,
+          lastname: result.body.lastName,
+          token: token.token,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +56,7 @@ function Panel() {
         <h1>
           Welcome back
           <br />
-          {`${isLoggedIn.firstname} ${isLoggedIn.lastname}`}
+          {`${isConnected.firstname} ${isConnected.lastname}`}
         </h1>
         <form id="form-info" className="disabled" onSubmit={handleSubmit}>
           <input id="firstname" name="firstname" type="text" disabled={true} />
