@@ -1,16 +1,24 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "../redux";
+import { isLoggedIn } from "../redux";
 import { useNavigate } from "react-router-dom";
 
 function Nav() {
-  const isLoggedIn = useSelector((state) => state.authentification);
+  const isConnected = useSelector((state) => state.authentification);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(signOut());
+    dispatch(
+      isLoggedIn({
+        isAuthentificated: false,
+        email: null,
+        firstname: null,
+        lastname: null,
+        token: null,
+      })
+    );
     navigate("/");
   };
 
@@ -27,14 +35,14 @@ function Nav() {
       <div>
         <Link
           className="main-nav-item"
-          to={isLoggedIn.isAuthentificated ? "/profile" : "/signin"}
+          to={isConnected.isAuthentificated ? "/profile" : "/signin"}
         >
           <i className="fa fa-user-circle" />
-          {isLoggedIn.isAuthentificated
-            ? ` ${isLoggedIn.firstname}`
+          {isConnected.isAuthentificated
+            ? ` ${isConnected.firstname}`
             : " Sign In"}
         </Link>
-        {isLoggedIn.isAuthentificated ? (
+        {isConnected.isAuthentificated ? (
           <Link className="main-nav-item" to="/" onClick={handleClick}>
             <i className="fa fa-arrow-right-from-bracket" />
             Sign Out

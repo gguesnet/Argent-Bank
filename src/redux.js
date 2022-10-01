@@ -17,15 +17,10 @@ const authSlice = createSlice({
       state.lastname = action.payload.lastname;
       state.token = action.payload.token;
     },
-    signOut: (state, action) => {
-      state.isAuthentificated = false;
-      state.email = null;
-      state.token = null;
-    },
   },
 });
 
-export const { isLoggedIn, signOut } = authSlice.actions;
+export const { isLoggedIn } = authSlice.actions;
 
 export const store = configureStore({
   reducer: {
