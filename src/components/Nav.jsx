@@ -23,6 +23,9 @@ function Nav() {
         token: null,
       })
     );
+    if (window.localStorage.getItem("user")) {
+      window.localStorage.removeItem("user");
+    }
     navigate("/");
   };
 

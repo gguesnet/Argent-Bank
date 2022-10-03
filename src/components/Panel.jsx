@@ -20,7 +20,7 @@ function Panel() {
     if (form.classList.contains("disabled")) {
       e.target.textContent = "Edit Name";
     } else {
-      e.target.textContent = "Cancel";
+      e.target.textContent = "Done";
     }
   }
 
@@ -33,16 +33,15 @@ function Panel() {
     };
 
     try {
-      const token = JSON.parse(window.localStorage.getItem("user"));
       const response = new ApiService(data);
-      const result = await response.putUserProfile(token.token);
+      const result = await response.putUserProfile(isConnected.token);
       dispatch(
         isLoggedIn({
           isAuthentificated: isConnected.isAuthentificated,
           email: isConnected.emal,
           firstname: result.body.firstName,
           lastname: result.body.lastName,
-          token: token.token,
+          token: isConnected.token,
         })
       );
     } catch (error) {

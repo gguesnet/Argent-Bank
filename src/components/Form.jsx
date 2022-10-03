@@ -17,20 +17,23 @@ function Form() {
     const data = {
       email: form.get("email"),
       password: form.get("password"),
+      remember: form.get("remember") ? true : false,
     };
 
     try {
       const response = new ApiService(data);
       const result = await response.postUserLogin(data);
       const getUserProfile = await response.postUserProfile(result.body.token);
-      window.localStorage.setItem(
-        "user",
-        JSON.stringify({
-          email: data.email,
-          token: result.body.token,
-          isAuthentificated: true,
-        })
-      );
+      if (data.remember) {
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: data.email,
+            token: result.body.token,
+            isAuthentificated: true,
+          })
+        );
+      }
       dispatch(
         isLoggedIn({
           isAuthentificated: true,
@@ -61,8 +64,8 @@ function Form() {
             <input type="password" name="password" id="password" />
           </div>
           <div className="input-remember">
-            <input type="checkbox" name="" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
+            <input type="checkbox" name="remember" id="remember" />
+            <label htmlFor="remember">Remember me</label>
           </div>
           <button className="sign-in-button" type="submit">
             Sign In
