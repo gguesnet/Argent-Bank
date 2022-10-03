@@ -5,7 +5,7 @@ import { store } from "./redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
-import Signin from "./pages/Signin";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import reportWebVitals from "./reportWebVitals";
 
@@ -16,7 +16,7 @@ root.render(
       <Router>
         <Routes>
           <Route index path="/" element={<Home />}></Route>
-          <Route path="/signin" element={<Signin />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
           <Route path="/profile" element={<Dashboard />}></Route>
         </Routes>
       </Router>

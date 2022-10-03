@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import Form from "../components/Form";
 import Footer from "../components/Footer";
 
-function Signin() {
+function Login() {
   return (
     <>
       <Nav />
@@ -12,4 +12,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Login;

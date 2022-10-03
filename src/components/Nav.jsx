@@ -42,7 +42,7 @@ function Nav() {
       <div>
         <Link
           className="main-nav-item"
-          to={isConnected.isAuthentificated ? "/profile" : "/signin"}
+          to={isConnected.isAuthentificated ? "/profile" : "/Login"}
         >
           <i className="fa fa-user-circle" />
           {isConnected.isAuthentificated
