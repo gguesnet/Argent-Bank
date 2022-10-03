@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "../redux";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Nav HTML Element
+ * @component
+ */
 function Nav() {
   const isConnected = useSelector((state) => state.authentification);
   const dispatch = useDispatch();

@@ -3,6 +3,10 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "../redux";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Form HTML Element
+ * @component
+ */
 function Form() {
   const dispatch = useDispatch();
   const navigate = useNavigate();

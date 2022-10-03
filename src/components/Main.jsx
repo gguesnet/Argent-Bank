@@ -1,3 +1,7 @@
+/**
+ * Main HTML Element
+ * @component
+ */
 function Main() {
   return (
     <main>
