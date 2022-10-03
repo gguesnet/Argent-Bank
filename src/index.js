@@ -16,7 +16,7 @@ root.render(
       <Router>
         <Routes>
           <Route index path="/" element={<Home />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/profile" element={<Dashboard />}></Route>
         </Routes>
       </Router>
