@@ -46,6 +46,8 @@ function Form() {
       navigate("/profile");
     } catch (error) {
       console.log(error);
+      const inputError = document.querySelector(".input-error");
+      inputError.style.display = "block";
     }
   }
 
@@ -63,9 +65,10 @@ function Form() {
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" />
           </div>
-          <div className="input-remember">
-            <input type="checkbox" name="remember" id="remember" />
-            <label htmlFor="remember">Remember me</label>
+          <div className="input-wrapper">
+            <span className="input-error">
+              Votre identifiant ou mot de passe est incorrect.
+            </span>
           </div>
           <button className="sign-in-button" type="submit">
             Sign In
