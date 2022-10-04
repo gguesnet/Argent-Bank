@@ -2,12 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  Navigate,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import reportWebVitals from "./reportWebVitals";
+
+function AuthGuard({ children }) {
+  const isLoggedIn = store.getState().authentification.isAuthentificated;
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,7 +32,14 @@ root.render(
         <Routes>
           <Route index path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/profile" element={<Dashboard />}></Route>
+          <Route
+            path="/profile"
+            element={
+              <AuthGuard>
+                <Dashboard />
+              </AuthGuard>
+            }
+          ></Route>
         </Routes>
       </Router>
     </React.StrictMode>
